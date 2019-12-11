@@ -1,4 +1,5 @@
-﻿using DataModel.Entities;
+﻿using System.Security;
+using DataModel.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DbContext
@@ -21,9 +22,8 @@ namespace DbContext
         {
             modelBuilder.Entity<Contact>(entity =>
             {
-                entity.HasKey(contact => contact.ContactId);
-
-                entity.HasIndex(contact => contact.PhoneNumber).IsUnique(true);
+                entity.HasIndex(contact => contact.Id);
+                entity.HasIndex(contact => contact.PhoneNumber);
             });
         }
     }

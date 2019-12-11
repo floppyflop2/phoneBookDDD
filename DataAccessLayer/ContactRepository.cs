@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccessLayer.Interfaces;
@@ -18,9 +19,15 @@ namespace DataAccessLayer
             _phoneBookDbContext = phoneBookDbContext;
         }
 
-        public async Task<Contact> GetContact(int id)
+        public async Task<List<Contact>> GetAllContacts()
         {
-            var foundedContact = await _phoneBookDbContext.Contacts.FirstOrDefaultAsync(contact => contact.ContactId == id);
+            var contacts = await _phoneBookDbContext.Contacts.ToListAsync();
+            return contacts;
+        }
+
+        public async Task<Contact> GetContact(Guid id)
+        {
+            var foundedContact = await _phoneBookDbContext.Contacts.FirstOrDefaultAsync(contact => contact.Id == id);
             return foundedContact;
         }
 
