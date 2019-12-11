@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace PhoneBookApi.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ContactController : ControllerBase
     {
@@ -21,6 +21,8 @@ namespace PhoneBookApi.Controllers
 
         // GET api/values
         [HttpGet]
+        [ProducesResponseType(201, Type = typeof(Contact))]
+        [ProducesResponseType(400)]
         public async Task<ActionResult<IEnumerable<Contact>>> GetAll()
         {
             var contacts = await _contactService.ListContacts();
@@ -29,6 +31,8 @@ namespace PhoneBookApi.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
+        [ProducesResponseType(201, Type = typeof(Contact))]
+        [ProducesResponseType(400)]
         public async Task<ActionResult<Contact>> Get(Guid id)
         {
             var contact = await _contactService.SearchContactById(id);
@@ -37,6 +41,8 @@ namespace PhoneBookApi.Controllers
 
         // POST api/values
         [HttpPost]
+        [ProducesResponseType(201, Type = typeof(Contact))]
+        [ProducesResponseType(400)]
         public async Task<IActionResult> Post([FromBody] Contact contact)
         {
             var createdContact = await _contactService.CreateContact(contact);
@@ -44,15 +50,19 @@ namespace PhoneBookApi.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
+        [HttpPut]
+        [ProducesResponseType(201, Type = typeof(Contact))]
+        [ProducesResponseType(400)]
         public IActionResult Put([FromBody] Contact contact)
         {
-            var createdContact =  _contactService.UpdateContact(contact);
+            var createdContact = _contactService.UpdateContact(contact);
             return CreatedAtRoute("Contact", createdContact);
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [ProducesResponseType(201, Type = typeof(Contact))]
+        [ProducesResponseType(400)]
         public IActionResult Delete([FromBody] Contact contact)
         {
             var createdContact = _contactService.DeleteContact(contact);

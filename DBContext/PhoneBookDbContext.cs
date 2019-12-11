@@ -1,5 +1,6 @@
 ﻿using System.Security;
 using DataModel.Entities;
+using DbContext.Seed;
 using Microsoft.EntityFrameworkCore;
 
 namespace DbContext
@@ -25,6 +26,8 @@ namespace DbContext
                 entity.HasIndex(contact => contact.Id);
                 entity.HasIndex(contact => contact.PhoneNumber);
             });
+
+            modelBuilder.SeedDataBase();
         }
     }
 }
