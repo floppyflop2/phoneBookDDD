@@ -1,4 +1,5 @@
-﻿using BusinessLayer;
+﻿using System;
+using BusinessLayer;
 using BusinessLayer.Interfaces;
 using DataAccessLayer;
 using DataAccessLayer.Interfaces;
@@ -34,8 +35,10 @@ namespace PhoneBookApi.Configuration
 
         public static void AddDatabaseConfiguration(this IServiceCollection services)
         {
+            var serverInfo = _configuration.GetSection("db:serverInfo").ToString();
+            var credential = Environment.GetEnvironmentVariable("PHONEBOOKDBCREDENTIAL");
+            var connectionString = $"{serverInfo}{credential}";
 
-            var connectionString = _configuration.GetSection("db:connestring").ToString();
             services.AddDbContext<PhoneBookDbContext>(optionsBuilder =>
                 optionsBuilder.UseSqlServer(connectionString));
         }

@@ -5,7 +5,7 @@ namespace DbContext
 {
     public class PhoneBookDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        public DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
 
         public PhoneBookDbContext(DbContextOptions options)
             : base(options)
