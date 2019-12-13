@@ -40,7 +40,7 @@ namespace PhoneBookApi.Configuration
             //var connectionString = $"{serverInfo}{credential}";
 
             var connectionString =
-                "Server=tcp:phonebookserver.database.windows.net,1433;Initial Catalog=PhoneBook_Florian;Persist Security Info=False;User ID=PhonebookAdmin;Password=Wemanity123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                "Server=tcp:phonebookserver.database.windows.net,1433;Initial Catalog=PhoneBook_Florian;Persist Security Info=False;User ID=PhonebookAdmin;Password=password;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
             services.AddDbContext<PhoneBookDbContext>(optionsBuilder =>
                 optionsBuilder.UseSqlServer(connectionString));
