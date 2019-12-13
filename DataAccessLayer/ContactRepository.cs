@@ -34,6 +34,7 @@ namespace DataAccessLayer
         public async Task<Contact> CreateContact(Contact contact)
         {
             var createdContact = await _phoneBookDbContext.Contacts.AddAsync(contact);
+            await _phoneBookDbContext.SaveChangesAsync();
             return createdContact.Entity;
         }
 
@@ -47,6 +48,7 @@ namespace DataAccessLayer
         public Contact UpdateContact(Contact contact)
         {
             var createdContact = _phoneBookDbContext.Contacts.Update(contact);
+            _phoneBookDbContext.SaveChangesAsync();
             return createdContact.Entity;
         }
     }

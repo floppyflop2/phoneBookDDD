@@ -46,7 +46,8 @@ namespace PhoneBookApi.Controllers
         public async Task<IActionResult> Post([FromBody] Contact contact)
         {
             var createdContact = await _contactService.CreateContact(contact);
-            return CreatedAtRoute("Contact", createdContact);
+            return Created($"api/[controller]/{createdContact.Id}", createdContact);
+
         }
 
         // PUT api/values/5
@@ -55,8 +56,8 @@ namespace PhoneBookApi.Controllers
         [ProducesResponseType(400)]
         public IActionResult Put([FromBody] Contact contact)
         {
-            var createdContact = _contactService.UpdateContact(contact);
-            return CreatedAtRoute("Contact", createdContact);
+            var updatedContact = _contactService.UpdateContact(contact);
+            return Created($"api/[controller]/{updatedContact.Id}", updatedContact);
         }
 
         // DELETE api/values/5
@@ -65,8 +66,8 @@ namespace PhoneBookApi.Controllers
         [ProducesResponseType(400)]
         public IActionResult Delete([FromBody] Contact contact)
         {
-            var createdContact = _contactService.DeleteContact(contact);
-            return CreatedAtRoute("Contact", createdContact);
+            var removedContact = _contactService.DeleteContact(contact);
+            return Created($"api/[controller]/{removedContact.Id}", removedContact);
         }
     }
 }
